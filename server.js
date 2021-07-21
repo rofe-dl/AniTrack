@@ -34,20 +34,7 @@ app.use(express.static(path.resolve(__dirname, "assets")));
 // app.use(express.static(path.resolve(__dirname, "assets/img")));
 // app.use(express.static(path.resolve(__dirname, "assets/js")));
 
-// load routers
+// load routers so that any url starting with / will load all the subpaths in router.js
 app.use('/', require('./server/routes/router'));
-
-// request to get first page of comedy anime
-// const request = require('request');
-// request('https://api.jikan.moe/v3/genre/anime/4/1', { json : true}, (err, res, body) => {
-//     if (err) {
-//         return console.log(err);
-//     }
-//     console.log("hi");
-//     body.anime.forEach((anime) => {
-//         console.log(anime.title);
-//     });
-    
-// })
 
 
