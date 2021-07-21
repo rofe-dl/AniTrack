@@ -1,31 +1,30 @@
 const express = require('express'); //runs the express.js and returns the exports object into variable, like importing
-const morgan = require('morgan');
-const path = require("path"); // built in lib to use paths for any os
+const app = express(); // makes the app
 
-const dotenv = require('dotenv'); // dotenv is a library to extract variables from a .env and load into process.env as env variable
+// morgan is a library used to log HTTP requests on the console
+const morgan = require('morgan');
+app.use(morgan('tiny'));
+
+// built in lib to use paths for any os
+const path = require("path");
+
+ // dotenv is a library to extract variables from a .env and load into process.env as env variable
+const dotenv = require('dotenv');
 dotenv.config({path: 'config.env'}) // specify the path of the dotenv file
 
-const bodyparser = require("body-parser"); // library that parses HTTP post requests to get the form data and convert it into objects
-
-const app = express(); // makes the app
+// library that parses HTTP post requests to get the form data and convert it into objects
+const bodyparser = require("body-parser");
+app.use(bodyparser.urlencoded({extended: true})); // set body parser
 
 const PORT = process.env.PORT || 8080; // || can be used to give default values to variables if first value is falsy
 
-//  function to run when root url is called
-app.get('/', (req,res)=>{
-    res.send("AniTrack");
-});
+// load routers
+app.use('/', require('./server/routes/router'));
 
 // specifies the port the app will listen to, function is a callback that gets called after app is initialized
 app.listen(PORT, ()=>{
     console.log(`Server is running on http://localhost:${PORT}`)
 });
-
-// morgan is a library used to log HTTP requests on the console
-app.use(morgan('tiny'));
-
-// set body parser
-app.use(bodyparser.urlencoded({extended: true}));
 
 // set view engine
 app.set("view engine", "ejs");
