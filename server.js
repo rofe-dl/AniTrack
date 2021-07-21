@@ -38,18 +38,18 @@ app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 app.use('/img', express.static(path.resolve(__dirname, "assets/img")));
 app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
 
-const request = require('request');
 
 // request to get first page of comedy anime
-request('https://api.jikan.moe/v3/genre/anime/4/1', { json : true}, (err, res, body) => {
-    if (err) {
-        return console.log(err);
-    }
-    console.log("hi");
-    body.anime.forEach((anime) => {
-        console.log(anime.title);
-    });
+// const request = require('request');
+// request('https://api.jikan.moe/v3/genre/anime/4/1', { json : true}, (err, res, body) => {
+//     if (err) {
+//         return console.log(err);
+//     }
+//     console.log("hi");
+//     body.anime.forEach((anime) => {
+//         console.log(anime.title);
+//     });
     
-})
+// })
 
 
