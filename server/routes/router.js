@@ -7,4 +7,4 @@ const services = require('../services/render');
 route.get('/', services.homeRoutes);
 
 // line used to define what gets returned when require() is called on this file
-module.exports = route
+module.exports = route;

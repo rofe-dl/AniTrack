@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+
+.navbar-brand{
+  font-size: 30px;
+  padding: 1px;
+  font-family: 'Otomanopee One', sans-serif;
+}
+
+.navbar{
+    background-color: #d95e07;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,.2);
+}
+
+body{
+    background-color: #dedede;
+}

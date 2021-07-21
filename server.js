@@ -18,9 +18,6 @@ app.use(bodyparser.urlencoded({extended: true})); // set body parser
 
 const PORT = process.env.PORT || 8080; // || can be used to give default values to variables if first value is falsy
 
-// load routers
-app.use('/', require('./server/routes/router'));
-
 // specifies the port the app will listen to, function is a callback that gets called after app is initialized
 app.listen(PORT, ()=>{
     console.log(`Server is running on http://localhost:${PORT}`)
@@ -32,11 +29,13 @@ app.set("view engine", "ejs");
 // it then sets the dir of views into another path, where __dirname returns the dir of the current file
 // app.set("views", path.resolve(__dirname, "views/ejs"));
 
-// load assets
-app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
-app.use('/img', express.static(path.resolve(__dirname, "assets/img")));
-app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
+// load assets from the directory
+app.use(express.static(path.resolve(__dirname, "assets")));
+// app.use(express.static(path.resolve(__dirname, "assets/img")));
+// app.use(express.static(path.resolve(__dirname, "assets/js")));
 
+// load routers
+app.use('/', require('./server/routes/router'));
 
 // request to get first page of comedy anime
 // const request = require('request');
