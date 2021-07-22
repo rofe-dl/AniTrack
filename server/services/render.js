@@ -1,14 +1,8 @@
 const api = require('./jikanAPI');
 
-exports.homeRoutes = (req, res) => {
+exports.homeRoutes = async (req, res) => {
+
     res.render('index', {
-        // animeFound : api.getComedyAnime() 
-        animeFound : [
-            {
-                imageURL : "https://cdn.myanimelist.net/images/anime/1819/97947.jpg"
-            },
-            {
-                imageURL : "https://cdn.myanimelist.net/images/anime/9/56155.jpg"
-            }]
+        animeFound : await api.getComedyAnime() 
     });
 }

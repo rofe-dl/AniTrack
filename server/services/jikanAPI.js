@@ -1,23 +1,20 @@
-// request to get first page of comedy anime
-const request = require('request');
+const axios = require('axios');
 
-module.exports.getComedyAnime = () => {
+/**
+ * Function to retrieve a set of comedy anime
+ * @returns An array of Anime objects, wrapped in a promise because it's an async function
+ */
+module.exports.getComedyAnime = async() => {
     const animeFound = [];
 
-    // request is an async function
-    request('https://api.jikan.moe/v3/genre/anime/4/1', { json : true}, (err, res, body) => {
-        if (err) {
-            return console.log(err);
-        }
-
-        body.anime.forEach((anime) => {
-            animeFound.push({
-                imageURL : anime.image_url
-            });
+    // axios.get returns a promise, so do await
+    const response = await axios.get('https://api.jikan.moe/v3/genre/anime/4/1');
+    response.data.anime.forEach((anime) => {
+        animeFound.push({
+            imageURL : anime.image_url
         });
-
-        return animeFound;
     });
 
+    return animeFound;
     
 };

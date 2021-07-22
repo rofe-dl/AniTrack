@@ -10,7 +10,7 @@ const path = require("path");
 
  // dotenv is a library to extract variables from a .env and load into process.env as env variable
 const dotenv = require('dotenv');
-dotenv.config({path: 'config.env'}) // specify the path of the dotenv file
+dotenv.config({path: 'config.env'}); // specify the path of the dotenv file
 
 // library that parses HTTP post requests to get the form data and convert it into objects
 const bodyparser = require("body-parser");
@@ -31,8 +31,7 @@ app.set("view engine", "ejs");
 
 // load assets from the directory
 app.use(express.static(path.resolve(__dirname, "assets")));
-// app.use(express.static(path.resolve(__dirname, "assets/img")));
-// app.use(express.static(path.resolve(__dirname, "assets/js")));
+
 
 // load routers so that any url starting with / will load all the subpaths in router.js
 app.use('/', require('./server/routes/router'));
