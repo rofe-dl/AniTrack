@@ -1,5 +1,5 @@
 # AniTrack (Work In Progress)
-[![demo.png](https://i.postimg.cc/g2CzTw55/demo.png)](https://postimg.cc/SnGbXKm7)
+[![image.png](https://i.postimg.cc/j5YqTZbb/image.png)](https://postimg.cc/VS4PB9vG)
 Anitrack is an anime tracking website, where you can browser anime by different criteria and view information about them. By logging in, you can add them to your watch list. You can even get suggestions from the site to decide on your next anime.
 
 This is a university project work for my CSE470 (Software Development) course.
