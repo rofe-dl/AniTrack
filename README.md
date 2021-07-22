@@ -9,11 +9,13 @@ This is a university project work for my CSE470 (Software Development) course.
 
 ## Development
 
-I've used [Jikan API](https://jikan.docs.apiary.io/#), a nice scraper that finds information from MyAnimeList and acts like an API. For the project, I tried to follow the MVC architecture to the best of my understanding.
+I've used the [Jikan API](https://jikan.docs.apiary.io/#), a nice free scraper that finds information from MyAnimeList and acts like an API. For the project, I tried to follow the MVC architecture to the best of my understanding. 
+
 ### Tools used
 * JavaScript, Node.js
 * ExpressJS
-* Embedded Javascript as my templating engine
+* Embedded Javascript (Templating Engine)
 * MariaDB
+* Bootstrap, EJS/CSS
 
 

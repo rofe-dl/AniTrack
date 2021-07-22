@@ -13,10 +13,16 @@
 
 body{
     background-color: #dedede;
+    
 }
 
 .img-small{
     max-height: 250px;
     width: auto;
     height: auto;
+}
+
+h4 {
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
