@@ -37,3 +37,9 @@ app.use(express.static(path.resolve(__dirname, "assets")));
 app.use('/', require('./server/routes/router'));
 
 
+/**
+ * TODO:
+ * 1. Limit requests to 25 a minute
+ * 2. slider in front page
+ */
+

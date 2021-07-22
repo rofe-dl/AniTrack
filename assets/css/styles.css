@@ -14,3 +14,9 @@
 body{
     background-color: #dedede;
 }
+
+.img-small{
+    max-height: 250px;
+    width: auto;
+    height: auto;
+}

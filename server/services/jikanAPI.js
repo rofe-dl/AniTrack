@@ -9,11 +9,13 @@ module.exports.getComedyAnime = async() => {
 
     // axios.get returns a promise, so do await
     const response = await axios.get('https://api.jikan.moe/v3/genre/anime/4/1');
-    response.data.anime.forEach((anime) => {
+
+    // limits front page to 5 anime for every genre
+    for (let i = 0; i < 5; i++){
         animeFound.push({
-            imageURL : anime.image_url
+            imageURL : response.data.anime[i].image_url
         });
-    });
+    }
 
     return animeFound;
     
