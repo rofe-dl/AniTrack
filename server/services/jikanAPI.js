@@ -13,27 +13,40 @@ module.exports.genreCodes = {
     thriller: 41, seinen: 42, josei: 43
 }
 
+/**
+ * Function to make the script pause for a set duration.
+ * @param {int} ms  Duration for the script to sleep for 
+ * @returns Promise
+ */
 function sleep(ms) {
     return new Promise((resolve) => {
       setTimeout(resolve, ms);
     });
-}   
+}
 
 /**
- * Function to retrieve a set of comedy anime
+ * Function used to make calls to the API. A delay set for rate limiting.
+ * @param {String} url  URL used to make the API call. 
+ * @returns Promise that can be resolved to a response object
+ */
+async function jikan(url){
+    await sleep(3000);
+
+    // axios.get returns a promise, so do await
+    return await axios.get(url);
+}
+
+/**
+ * Function to retrieve the anime to show on the front page
  * @returns An array of Anime objects, wrapped in a promise because it's an async function
  */
 module.exports.getFrontPageAnime = async() => {
     const comedy = [], seinen = [], shoujo = [], thriller = [];
 
-    // axios.get returns a promise, so do await
-    const responseComedy = await axios.get(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.comedy}/1`);
-    sleep(2000);
-    const responseSeinen = await axios.get(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.seinen}/1`);
-    sleep(2000);
-    const responseShoujo = await axios.get(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.shoujo}/1`);
-    sleep(2000);
-    const responseThriller = await axios.get(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.thriller}/1`);
+    const responseComedy = await jikan(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.comedy}/1`);
+    const responseSeinen = await jikan(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.seinen}/1`);
+    const responseShoujo = await jikan(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.shoujo}/1`);
+    const responseThriller = await jikan(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.thriller}/1`);
 
     // limits front page to 5 anime for every genre
     for (let i = 0; i < 5; i++){
