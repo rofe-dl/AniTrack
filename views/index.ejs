@@ -25,37 +25,25 @@
         <h4>Comedy Anime</h4>
         <div class="row row-cols-6">
             <%  animeFound.comedy.forEach( (anime) => { %>
-                <div class="col">
-                    <img src="<%= anime.image_url %>" class="img-small"/>
-                </div>
-                
+                <%- include('./include/_animeThumbnail.ejs', {anime: anime}) %>
             <% }); %>
         </div>
         <h4>Seinen Anime</h4>
         <div class="row row-cols-6">
             <%  animeFound.seinen.forEach( (anime) => { %>
-                <div class="col">
-                    <img src="<%= anime.image_url %>" class="img-small"/>
-                </div>
-                
+                <%- include('./include/_animeThumbnail.ejs', {anime: anime}) %>
             <% }); %>
         </div>
         <h4>Shoujo Anime</h4>
         <div class="row row-cols-6">
             <%  animeFound.shoujo.forEach( (anime) => { %>
-                <div class="col">
-                    <img src="<%= anime.image_url %>" class="img-small"/>
-                </div>
-                
+                <%- include('./include/_animeThumbnail.ejs', {anime: anime}) %>
             <% }); %>
         </div>
         <h4>Thriller Anime</h4>
         <div class="row row-cols-6">
             <%  animeFound.thriller.forEach( (anime) => { %>
-                <div class="col">
-                    <img src="<%= anime.image_url %>" class="img-small"/>
-                </div>
-                
+                <%- include('./include/_animeThumbnail.ejs', {anime: anime}) %>
             <% }); %>
         </div>
     </div>

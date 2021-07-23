@@ -107,7 +107,7 @@ module.exports.getFrontPageAnime = async() => {
 
             // Saves the value in cache
             await redisClient.setAsync(`aniTrack:https://api.jikan.moe/v3/genre/anime/${genreCode}/1`, JSON.stringify(response[key]));
-
+            // Slicing to only show 5 anime per genre on the front page
             response[key] = response[key].anime.slice(0,5);
         }
     }
