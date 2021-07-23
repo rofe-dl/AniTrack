@@ -40,6 +40,7 @@ app.use('/', require('./server/routes/router'));
  * TODO:
  * 1. Limit requests to 25 a minute
  * 2. slider in front page
- * 3. cache the front page
+ * 3. cache api responses
+ * 4. slider on front page
  */
 
