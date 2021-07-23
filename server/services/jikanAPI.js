@@ -1,9 +1,9 @@
 const axios = require('axios');
 
 /**
- * Install Redis on Linux/WSL first. It's used as a cache server that 
+ * Install Redis on Linux/WSL/Mac first. It's used as a cache server that 
  * caches the API responses from Jikan, storing JSON as value 
- * against aniTrack:`url` as a key. Default hostname and port are 
+ * against " aniTrack:`url` " as a key. Default hostname and port are 
  * 127.0.0.1(localhost) & 6379 respectively
  */
 const redis = require('redis');
@@ -15,7 +15,7 @@ redisClient.on("error", function(error) {
 /**
  * Promisifies the function of the whole redis module,
  * as they are callback based, making it hard to retrieve
- * values fromm the callback functions.Instead it's convenient
+ * values from the callback functions.Instead it's convenient
  * to make them return promises and use async/await.
  * Every function in the module will then have another copy
  * of it named with Async appended at the end of function name.
@@ -25,7 +25,9 @@ const { promisifyAll } = require('bluebird');
 promisifyAll(redis);
 
 
-
+/**
+ * Jikan has a genre code for every genre of anime.
+ */
 module.exports.genreCodes = {
     action: 1, adventure: 2, cars: 3, comedy: 4,
     dementia: 5, demons: 6, mystery: 7, drama: 8,
@@ -52,12 +54,18 @@ function sleep(ms) {
 }
 
 /**
- * Function used to make calls to the API. A delay set for rate limiting.
+ * Function used to make calls to the API. A 2s delay set for rate limiting.
+ * 
  * @param {String} url  URL used to make the API call. 
  * @returns Promise that can be resolved to a response object
  */
 async function jikan(url){
     await sleep(2000);
+
+    // Jikan cache URL
+    //https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3/genre/anime/${this.genreCodes.comedy}/1
+    // Jikan URL
+    //https://api.jikan.moe/v3/genre/anime/${this.genreCodes.comedy}/1
 
     // axios.get returns a promise, so do await
     return await axios.get(url);
@@ -65,57 +73,45 @@ async function jikan(url){
 
 /**
  * Function to retrieve the anime to show on the front page
- * @returns An array of Anime objects, wrapped in a promise because it's an async function
+ * @returns A response object containing arrays of anime objects, wrapped in a promise because it's an async function
  */
 module.exports.getFrontPageAnime = async() => {
-    const comedy = [], seinen = [], shoujo = [], thriller = [];
 
-    // Jikan cache URL
-    //https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3/genre/anime/${this.genreCodes.comedy}/1
-    // Jikan URL
-    //https://api.jikan.moe/v3/genre/anime/${this.genreCodes.comedy}/1
-
-    let responseComedy = await redisClient.getAsync(`aniTrack:https://api.jikan.moe/v3/genre/anime/${this.genreCodes.comedy}/1`);
-    // let cacheSeinen = await redisClient.get(`aniTrack:https://api.jikan.moe/v3/genre/anime/${this.genreCodes.seinen}/1`);
-    // let cacheShoujo = await redisClient.get(`aniTrack:https://api.jikan.moe/v3/genre/anime/${this.genreCodes.shoujo}/1`);
-    // let cacheThriller = await redisClient.get(`aniTrack:https://api.jikan.moe/v3/genre/anime/${this.genreCodes.thriller}/1`);
-
-    if (responseComedy !== null){
-        responseComedy = JSON.parse(responseComedy);
-    }else{
-        responseComedy = await jikan(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.comedy}/1`);
-
-        // Gets the JSON object
-        responseComedy = responseComedy.data;
-        await redisClient.setAsync(`aniTrack:https://api.jikan.moe/v3/genre/anime/${this.genreCodes.comedy}/1`, JSON.stringify(responseComedy));
+    let response = {
+        comedy : [],
+        seinen : [],
+        shoujo : [],
+        thriller : []
     }
 
-    
-    // const responseSeinen = await jikan(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.seinen}/1`);
-    // const responseShoujo = await jikan(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.shoujo}/1`);
-    // const responseThriller = await jikan(`https://api.jikan.moe/v3/genre/anime/${this.genreCodes.thriller}/1`);
+    // Stores the keys of the response object in an array to iterate the genres later
+    const responseKeys = Object.keys(response);
 
-    // limits front page to 5 anime for every genre
-    for (let i = 0; i < 5; i++){
-        comedy.push({
-            imageURL : responseComedy.anime[i].image_url
-        });
-        // seinen.push({
-        //     imageURL : responseSeinen.data.anime[i].image_url
-        // });
-        // shoujo.push({
-        //     imageURL : responseShoujo.data.anime[i].image_url
-        // });
-        // thriller.push({
-        //     imageURL : responseThriller.data.anime[i].image_url
-        // });
+    // Loop used to iterate the genres and check if response exists in Redis cache
+    // Use [] instead of . , to access object properties using variable names
+    for(let index in responseKeys){
+
+        let key = responseKeys[index];
+        let genreCode = exports.genreCodes[key];
+
+        response[key] = await redisClient.getAsync(`aniTrack:https://api.jikan.moe/v3/genre/anime/${genreCode}/1`);
+
+        // if cache hit, it's not null, so just get the JSON from the string and set it to it 
+        if (response[key] !== null){
+            response[key] = JSON.parse(response[key]).anime.slice(0,5);
+        }else{
+            // cache miss, so do an API call 
+            response[key] = await jikan(`https://api.jikan.moe/v3/genre/anime/${genreCode}/1`);
+            // Gets the JSON object
+            response[key] = response[key].data;
+
+            // Saves the value in cache
+            await redisClient.setAsync(`aniTrack:https://api.jikan.moe/v3/genre/anime/${genreCode}/1`, JSON.stringify(response[key]));
+
+            response[key] = response[key].anime.slice(0,5);
+        }
     }
 
-    return [comedy];
-    // return [comedy, seinen, shoujo, thriller];
+    return response;
     
 };
-
-module.exports.updateFrontPageAnime = () => {
-
-}

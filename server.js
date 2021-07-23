@@ -42,5 +42,6 @@ app.use('/', require('./server/routes/router'));
  * 2. slider in front page
  * 3. cache api responses
  * 4. slider on front page
+ * 5. fix stale cache
  */
 
