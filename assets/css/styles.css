@@ -16,7 +16,7 @@ body{
     background-color: #dedede;
 }
 
-/* Anime thumbnails with labels */
+/* Front page nime thumbnails with labels */
 .anime-thumbnail div{
     color: black;
     font-family: 'Lato', sans-serif;
@@ -33,9 +33,21 @@ body{
     height: auto;
 }
 
-h4 {
+.img-large{
+    width: auto;
+    height: auto;
+    min-height: 450px;
+}
+
+.genre-title {
     margin-top: 50px;
     margin-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.anime-title {
+    margin-top: 75px;
+    margin-bottom: 30px;
     font-family: 'Lato', sans-serif;
 }
 

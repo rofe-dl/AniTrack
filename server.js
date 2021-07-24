@@ -43,5 +43,6 @@ app.use('/', require('./server/routes/router'));
  * 3. cache api responses
  * 4. slider on front page
  * 5. fix stale cache
+ * 6. fix responsiveness on anime info page
  */
 
