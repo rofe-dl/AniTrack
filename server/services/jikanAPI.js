@@ -137,6 +137,14 @@ module.exports.getAnimeInfo = async (animeID) => {
     return response;
 }
 
+/**
+ * Function that takes in query parameters from the search function and
+ * return the search result containing all matching anime found.
+ * No caching is done here. 
+ * 
+ * @param {String} query    Contains query parameters from the url 
+ * @returns JSON response with a field 'results', containing the result set
+ */
 module.exports.searchAnime = async(query) => {
     const params = new URLSearchParams({
         q : query.name,

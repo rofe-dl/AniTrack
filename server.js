@@ -46,5 +46,6 @@ app.use('/', require('./server/routes/router'));
  * 6. fix responsiveness on anime info page
  * 7. pagination in search and watch list
  * 8. fix hamburger icon
+ * 9. show search result without reloading
  */
 
