@@ -143,7 +143,9 @@ module.exports.searchAnime = async(query) => {
         genre : this.genreCodes[query.genre],
         page : 1,
         type : query.type,
-        status : query.status
+        status : query.status,
+        order_by : query.order_by,
+        sort_by : query.sort_by
     });
 
     let response = await jikan(`${JIKAN_URL}/search/anime?${params.toString()}`);

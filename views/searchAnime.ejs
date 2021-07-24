@@ -7,15 +7,15 @@
         </div>
         <form method="GET" action="/anime/search">
             <div class="form-row">
-                <div class="col-md-6 col-12">
+                <div class="col-md-2 col-12">
                   <input type="text" class="form-control form-control-sm" placeholder="Search ..." name="name">
                 </div>
-                <div class="col-md-2 col-5">
+                <div class="col-md-2 col-4">
                   <select class="form-control form-control-sm" name="genre">
                     <%- include('./include/_genres.ejs') %>
                   </select>
                 </div>
-                <div class="col-md-2 col-5">
+                <div class="col-md-2 col-4">
                     <select class="form-control form-control-sm" name="status">
                         <option value="">-- Status --</option>
                         <option value="airing">Airing</option>
@@ -24,8 +24,24 @@
                         <option value="upcoming">Upcoming</option>
                     </select>
                 </div>
-                <div class="col-md-2 col-2">
-                    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                <div class="col-md-2 col-4">
+                    <select class="form-control form-control-sm" name="order_by">
+                        <option value="">-- Order By --</option>
+                        <option value="title">Title</option>
+                        <option value="start_date">Start Date</option>
+                        <option value="end_date">End Date</option>
+                        <option value="score">Score</option>
+                    </select>
+                </div>
+                <div class="col-md-2 col-8">
+                    <select class="form-control form-control-sm" name="sort_by">
+                        <option value="">-- Sort By --</option>
+                        <option value="ascending">Ascending</option>
+                        <option value="descending">Descending</option>
+                    </select>
+                </div>
+                <div class="col-md-2 col-4">
+                    <button type="submit" class="btn btn-primary btn-sm btn-block">Search</button>
                 </div>
             </div>
         </form>
