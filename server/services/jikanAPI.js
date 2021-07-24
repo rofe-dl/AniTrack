@@ -13,7 +13,7 @@ redisClient.on("error", function(error) {
 });
 
 /**
- * Promisifies the function of the whole redis module,
+ * Bluebird promisifies the function of the whole redis module,
  * as they are callback based, making it hard to retrieve
  * values from the callback functions.Instead it's convenient
  * to make them return promises and use async/await.
@@ -21,7 +21,8 @@ redisClient.on("error", function(error) {
  * of it named with Async appended at the end of function name.
  * e.g set becomes setAsync, get becomes getAsync
  */
-const { promisifyAll } = require('bluebird');
+const { promisifyAll } = require('bluebird'); 
+// syntax to say something like const a = require('bluebird').promisifyAll; a(redis);
 promisifyAll(redis);
 
 
@@ -115,3 +116,18 @@ module.exports.getFrontPageAnime = async() => {
     return response;
     
 };
+
+module.exports.getAnimeInfo = async (animeID) => {
+    let response = await redisClient.getAsync(`aniTrack:https://api.jikan.moe/v3/anime/${animeID}`);
+
+    if (response !== null){
+        response = JSON.parse(response);
+    }else{
+        response = await jikan(`https://api.jikan.moe/v3/anime/${animeID}`);
+        response = response.data;
+
+        await redisClient.setAsync(`aniTrack:https://api.jikan.moe/v3/anime/${animeID}`, JSON.stringify(response));
+    }
+
+    return response;
+}

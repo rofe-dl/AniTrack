@@ -16,6 +16,7 @@ body{
     background-color: #dedede;
 }
 
+/* Anime thumbnails with labels */
 .anime-thumbnail div{
     color: black;
     font-family: 'Lato', sans-serif;
@@ -24,6 +25,7 @@ body{
 .anime-thumbnail{
     text-align: center;
 }
+ /*                             */
 
 .img-small{
     max-height: 250px;
@@ -36,3 +38,4 @@ h4 {
     margin-bottom: 20px;
     font-family: 'Lato', sans-serif;
 }
+
