@@ -24,6 +24,8 @@ body{
 
 .anime-thumbnail{
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
  /*                             */
 
@@ -47,7 +49,7 @@ body{
     font-family: 'Lato', sans-serif;
 }
 
-.anime-title {
+.general-title {
     margin-top: 75px;
     margin-bottom: 60px;
     margin-left: 10px;

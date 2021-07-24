@@ -44,5 +44,7 @@ app.use('/', require('./server/routes/router'));
  * 4. slider on front page
  * 5. fix stale cache
  * 6. fix responsiveness on anime info page
+ * 7. pagination in search and watch list
+ * 8. fix hamburger icon
  */
 

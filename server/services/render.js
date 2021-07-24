@@ -13,3 +13,16 @@ exports.viewAnimeInfo = async(req, res) => {
         anime: anime
     });
 }
+
+exports.searchAnime = async(req, res) => {
+    if (!Object.keys(req.query).length){
+        res.render('searchAnime', {
+            results : []
+        });
+    }else{
+        const response = await api.searchAnime(req.query);
+        res.render('searchAnime', {
+            results : response.results // json response has a field named results containing the anime
+        });
+    }
+}

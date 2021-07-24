@@ -1,3 +1,9 @@
+// Jikan cache URL
+//https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3/
+// Jikan URL
+//https://api.jikan.moe/v3/
+const JIKAN_URL = "https://api.jikan.moe/v3";
+
 const axios = require('axios');
 
 /**
@@ -63,11 +69,6 @@ function sleep(ms) {
 async function jikan(url){
     await sleep(2000);
 
-    // Jikan cache URL
-    //https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3/genre/anime/${this.genreCodes.comedy}/1
-    // Jikan URL
-    //https://api.jikan.moe/v3/genre/anime/${this.genreCodes.comedy}/1
-
     // axios.get returns a promise, so do await
     return await axios.get(url);
 }
@@ -95,19 +96,19 @@ module.exports.getFrontPageAnime = async() => {
         let key = responseKeys[index];
         let genreCode = exports.genreCodes[key];
 
-        response[key] = await redisClient.getAsync(`aniTrack:https://api.jikan.moe/v3/genre/anime/${genreCode}/1`);
+        response[key] = await redisClient.getAsync(`aniTrack:${JIKAN_URL}/genre/anime/${genreCode}/1`);
 
         // if cache hit, it's not null, so just get the JSON from the string and set it to it 
         if (response[key] !== null){
             response[key] = JSON.parse(response[key]).anime.slice(0,5);
         }else{
             // cache miss, so do an API call 
-            response[key] = await jikan(`https://api.jikan.moe/v3/genre/anime/${genreCode}/1`);
+            response[key] = await jikan(`${JIKAN_URL}/genre/anime/${genreCode}/1`);
             // Gets the JSON object
             response[key] = response[key].data;
 
             // Saves the value in cache
-            await redisClient.setAsync(`aniTrack:https://api.jikan.moe/v3/genre/anime/${genreCode}/1`, JSON.stringify(response[key]));
+            await redisClient.setAsync(`aniTrack:${JIKAN_URL}/genre/anime/${genreCode}/1`, JSON.stringify(response[key]));
             // Slicing to only show 5 anime per genre on the front page
             response[key] = response[key].anime.slice(0,5);
         }
@@ -117,17 +118,36 @@ module.exports.getFrontPageAnime = async() => {
     
 };
 
+/**
+ * Function to retrieve information about the anime given the anime ID
+ * @returns An object containing information about that anime
+ */
 module.exports.getAnimeInfo = async (animeID) => {
-    let response = await redisClient.getAsync(`aniTrack:https://api.jikan.moe/v3/anime/${animeID}`);
+    let response = await redisClient.getAsync(`aniTrack:${JIKAN_URL}/anime/${animeID}`);
 
     if (response !== null){
         response = JSON.parse(response);
     }else{
-        response = await jikan(`https://api.jikan.moe/v3/anime/${animeID}`);
+        response = await jikan(`${JIKAN_URL}/anime/${animeID}`);
         response = response.data;
 
-        await redisClient.setAsync(`aniTrack:https://api.jikan.moe/v3/anime/${animeID}`, JSON.stringify(response));
+        await redisClient.setAsync(`aniTrack:${JIKAN_URL}/anime/${animeID}`, JSON.stringify(response));
     }
+
+    return response;
+}
+
+module.exports.searchAnime = async(query) => {
+    const params = new URLSearchParams({
+        q : query.name,
+        genre : this.genreCodes[query.genre],
+        page : 1,
+        type : query.type,
+        status : query.status
+    });
+
+    let response = await jikan(`${JIKAN_URL}/search/anime?${params.toString()}`);
+    response = response.data;
 
     return response;
 }
