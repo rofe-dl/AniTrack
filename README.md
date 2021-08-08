@@ -17,7 +17,7 @@ For the project, I tried to follow the MVC architecture to the best of my unders
 * JavaScript, Node.js
 * ExpressJS
 * Embedded Javascript (Templating Engine)
-* MariaDB
+* MongoDB
 * Bootstrap, EJS/CSS
 * Redis
 

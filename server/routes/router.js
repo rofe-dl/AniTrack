@@ -17,6 +17,10 @@ route.get('/', render.homeRoutes);
 route.get('/anime/search', render.searchAnime);
 route.get('/anime/:animeID', render.viewAnimeInfo);
 
+route.get('/register', render.register);
+route.get('/login', render.login);
+route.get('/logout', render.logout);
+route.get('/dashboard', render.dashboard);
 
 
 // line used to define what gets returned when require() is called on this file

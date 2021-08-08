@@ -47,5 +47,6 @@ app.use('/', require('./server/routes/router'));
  * 7. pagination in search and watch list
  * 8. fix hamburger icon
  * 9. show search result without reloading
+ * 10. use bootstrap cards for anime thumbnails
  */
 
