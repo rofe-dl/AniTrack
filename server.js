@@ -36,6 +36,13 @@ app.use(express.static(path.resolve(__dirname, "assets")));
 // load routers so that any url starting with / will load all the subpaths in router.js
 app.use('/', require('./server/routes/router'));
 
+// Database connection stuff
+const mongoose = require('mongoose');
+const dbConfig = process.env.MongoURI;
+console.log(dbConfig); // check for special characters in the MongoDB URI to replace them with percentage encoding
+mongoose.connect(dbConfig, { useNewUrlParser: true})
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
 /**
  * TODO:
  * 1. Limit requests to 25 a minute
@@ -48,5 +55,6 @@ app.use('/', require('./server/routes/router'));
  * 8. fix hamburger icon
  * 9. show search result without reloading
  * 10. use bootstrap cards for anime thumbnails
+ * 11. fix html title for each page
  */
 

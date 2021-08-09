@@ -1,4 +1,4 @@
-const api = require('./jikanAPI');
+const api = require('./jikan_API');
 
 exports.homeRoutes = async (req, res) => {
     const animeFound = await api.getFrontPageAnime();
@@ -9,19 +9,19 @@ exports.homeRoutes = async (req, res) => {
 
 exports.viewAnimeInfo = async(req, res) => {
     const anime = await api.getAnimeInfo(req.params.animeID);
-    res.render('animeInfo', {
+    res.render('anime_info', {
         anime: anime
     });
 }
 
 exports.searchAnime = async(req, res) => {
     if (!Object.keys(req.query).length){
-        res.render('searchAnime', {
+        res.render('search_anime', {
             results : []
         });
     }else{
         const response = await api.searchAnime(req.query);
-        res.render('searchAnime', {
+        res.render('search_anime', {
             results : response.results // json response has a field named results containing the anime
         });
     }
