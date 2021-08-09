@@ -1,12 +1,12 @@
 const express = require('express');
 const route = express.Router();
 
-const render = require('../services/render');
+const {controller, user_controller, api_controller} = require('../controller/index');
 
 /**
  * Root URL.
  */
-route.get('/', render.homeRoutes);
+route.get('/', controller.homeRoute);
 
 /**
  * URL sequence matters, so edit with care.
@@ -14,13 +14,13 @@ route.get('/', render.homeRoutes);
  * /anime/search as a viewAnimeInfo URL, with search as the animeID, and won't
  * return anything.
  */
-route.get('/anime/search', render.searchAnime);
-route.get('/anime/:animeID', render.viewAnimeInfo);
+route.get('/anime/search', api_controller.searchAnime);
+route.get('/anime/:animeID', api_controller.viewAnimeInfo);
 
-route.get('/register', render.register);
-route.get('/login', render.login);
-route.get('/logout', render.logout);
-route.get('/dashboard', render.dashboard);
+route.get('/register', user_controller.register);
+route.get('/login', user_controller.login);
+route.get('/logout', user_controller.logout);
+route.get('/dashboard', user_controller.dashboard);
 
 
 // line used to define what gets returned when require() is called on this file
