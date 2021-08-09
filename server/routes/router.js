@@ -1,6 +1,8 @@
 const express = require('express');
 const route = express.Router();
 
+const { check, validationResult } = require('express-validator');
+
 const {controller, user_controller, api_controller} = require('../controller/index');
 
 /**
@@ -17,10 +19,14 @@ route.get('/', controller.homeRoute);
 route.get('/anime/search', api_controller.searchAnime);
 route.get('/anime/:animeID', api_controller.viewAnimeInfo);
 
-route.get('/register', user_controller.register);
+route.get('/register', user_controller.getRegister);
 route.get('/login', user_controller.login);
 route.get('/logout', user_controller.logout);
 route.get('/dashboard', user_controller.dashboard);
+
+route.post('/register', [
+        check('email', 'Please enter a valid email').isEmail()
+    ], user_controller.postRegister);
 
 
 // line used to define what gets returned when require() is called on this file

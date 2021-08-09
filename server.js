@@ -32,7 +32,6 @@ app.set("view engine", "ejs");
 // load assets from the directory
 app.use(express.static(path.resolve(__dirname, "assets")));
 
-
 // load routers so that any url starting with / will load all the subpaths in router.js
 app.use('/', require('./server/routes/router'));
 

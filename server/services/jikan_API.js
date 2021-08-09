@@ -1,8 +1,8 @@
 // Jikan cache URL
-//https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3/
+//https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3
 // Jikan URL
-//https://api.jikan.moe/v3/
-const JIKAN_URL = "https://api.jikan.moe/v3";
+//https://api.jikan.moe/v3
+const JIKAN_URL = "https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3";
 
 const axios = require('axios');
 
@@ -102,7 +102,8 @@ module.exports.getFrontPageAnime = async() => {
         if (response[key] !== null){
             response[key] = JSON.parse(response[key]).anime.slice(0,5);
         }else{
-            // cache miss, so do an API call 
+            // cache miss, so do an API call
+            
             response[key] = await jikan(`${JIKAN_URL}/genre/anime/${genreCode}/1`);
             // Gets the JSON object
             response[key] = response[key].data;
@@ -113,7 +114,7 @@ module.exports.getFrontPageAnime = async() => {
             response[key] = response[key].anime.slice(0,5);
         }
     }
-
+    
     return response;
     
 };
