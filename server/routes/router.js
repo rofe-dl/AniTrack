@@ -1,9 +1,8 @@
 const express = require('express');
 const route = express.Router();
 
-const { check, validationResult } = require('express-validator');
-
-const {controller, user_controller, api_controller} = require('../controller/index');
+const { registerFormValidations } = require('../services/validator');
+const {controller, user_controller, api_controller} = require('../controller');
 
 /**
  * Root URL.
@@ -24,9 +23,7 @@ route.get('/login', user_controller.login);
 route.get('/logout', user_controller.logout);
 route.get('/dashboard', user_controller.dashboard);
 
-route.post('/register', [
-        check('email', 'Please enter a valid email').isEmail()
-    ], user_controller.postRegister);
+route.post('/register', registerFormValidations , user_controller.postRegister);
 
 
 // line used to define what gets returned when require() is called on this file

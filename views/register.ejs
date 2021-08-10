@@ -9,15 +9,9 @@
                     Register
                 </h1>
 
-                <% if(typeof alert != 'undefined') { %>
-                    <% alert.forEach(function(error) { %>
-                        <div class="alert alert-warning" role="alert">
-                            <%= error.msg %>
-                        </div>
-                    <% }) %>
-                <% } %>
+                <%- include('./include/_warning_message.ejs') %>
 
-                <form action="/register" method="POST">
+                <form action="/register" method="POST" novalidate>
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="name" id="name" name="name" class="form-control"

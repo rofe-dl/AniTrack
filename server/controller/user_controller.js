@@ -1,5 +1,5 @@
 const api = require('../services/jikan_API');
-const { check, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 exports.getRegister = (req, res) => {
     res.render('register');
@@ -10,8 +10,12 @@ exports.postRegister = (req, res) => {
     if (!errors.isEmpty()){
         const alert = errors.array();
         res.render('register', {
-            alert
+            alert,
+            name : req.body.name,
+            email : req.body.email
         });
+    }else{
+        
     }
 
     console.log(req.body);
