@@ -11,11 +11,11 @@
 
                 <form action="/login" method="POST">
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="email">Email</label>
                         <input
-                        type="name"
-                        id="name"
-                        name="name"
+                        type="email"
+                        id="email"
+                        name="email"
                         class="form-control"
                         value="<%= typeof name != 'undefined' ? name : '' %>"
                         />
@@ -28,7 +28,6 @@
                         id="password"
                         name="password"
                         class="form-control"
-                        value="<%= typeof password != 'undefined' ? password : '' %>"
                         />
                     </div>
 

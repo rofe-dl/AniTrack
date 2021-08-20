@@ -1,4 +1,4 @@
-const api = require('../services/jikan_API');
+const api = require('../utils/jikan_API');
 
 exports.homeRoute = async (req, res) => {
     const animeFound = await api.getFrontPageAnime();

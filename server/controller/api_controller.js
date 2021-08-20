@@ -1,4 +1,4 @@
-const api = require('../services/jikan_API');
+const api = require('../utils/jikan_API');
 
 exports.viewAnimeInfo = async(req, res) => {
     const anime = await api.getAnimeInfo(req.params.animeID);

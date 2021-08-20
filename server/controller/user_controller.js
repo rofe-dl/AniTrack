@@ -1,6 +1,7 @@
-const api = require('../services/jikan_API');
+const api = require('../utils/jikan_API');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 // const { v4: uuidv4 } = require('uuid');
 
 const User = require('../models/User');
@@ -68,13 +69,14 @@ exports.login = (req, res) => {
     res.render('login');
 }
 
-exports.logout = async (req, res) => {
-    const animeFound = await api.getFrontPageAnime();
-    res.render('index', {
-        animeFound : animeFound // confusing, but this seems to work? second variable is the const above
-    });
+exports.postLogin = (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    })(req, res, next);
 }
 
-exports.dashboard = (req, res) => {
-    res.render('dashboard');
+exports.logout = async (req, res, next) => {
+    req.logout();
+    res.redirect('/');
 }

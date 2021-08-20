@@ -32,16 +32,31 @@ app.set("view engine", "ejs");
 // load assets from the directory
 app.use(express.static(path.resolve(__dirname, "assets")));
 
-// load routers so that any url starting with / will load all the subpaths in router.js
-app.use('/', require('./server/routes/router'));
-
 // Database connection stuff
 const mongoose = require('mongoose');
-const dbConfig = process.env.MongoURI;
-console.log(dbConfig); // check for special characters in the MongoDB URI to replace them with percentage encoding
+const dbConfig = process.env.MongoURI; // check for special characters in the MongoDB URI to replace them with percentage encoding
 mongoose.connect(dbConfig, { useNewUrlParser: true})
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
+
+// Express Session middleware
+const session = require('express-session');
+app.use(session({
+    secret : process.env.session_secret,
+    resave : true,
+    saveUninitialized : true
+}))
+
+const passport = require('passport');
+require('./server/utils/passport')(passport);
+
+// has to be after session middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// load routers so that any url starting with / will load all the subpaths in router.js
+app.use('/', require('./server/routes/router'));
+
 /**
  * TODO:
  * 1. Limit requests to 25 a minute
