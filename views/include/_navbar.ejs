@@ -6,7 +6,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav ml-auto">
-              <a class="nav-item nav-link" href="/anime/search">Search</a>
+                <a class="nav-item nav-link" href="/anime/search">Search</a>
+                <% if(locals.user !== null) { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= locals.user.name %>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+                <% }else { %>
+                    <a class="nav-item nav-link" href="/login">Login</a>
+                    <a class="btn btn-outline-light nav-item nav-link" href="/register">Register</a>
+                <% } %>
             </div>
         </div>
     </div>

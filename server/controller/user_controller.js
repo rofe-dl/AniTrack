@@ -11,8 +11,12 @@ const User = require('../models/User');
  * @param {*} req 
  * @param {*} res 
  */
-exports.getRegister = (req, res) => {
-    res.render('register');
+exports.getRegister = (req, res, next) => {
+    if(req.isAuthenticated()){
+        res.redirect('/');
+    }else{
+        res.render('register');
+    }
 }
 
 /**
@@ -20,7 +24,7 @@ exports.getRegister = (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-exports.postRegister = (req, res) => {
+exports.postRegister = (req, res, next) => {
     const errors = validationResult(req);
     const alert = errors.array();
     const { name, email, password } = req.body;
@@ -45,7 +49,7 @@ exports.postRegister = (req, res) => {
                 const newUser = new User({
                     name,
                     email,
-                    password,
+                    password
                 });
 
                 bcrypt.genSalt(10, (err, salt) => {
@@ -65,8 +69,12 @@ exports.postRegister = (req, res) => {
     }
 }
 
-exports.login = (req, res) => {
-    res.render('login');
+exports.login = (req, res, next) => {
+    if(req.isAuthenticated()){
+        res.redirect('/');
+    }else{
+        res.render('login');
+    }
 }
 
 exports.postLogin = (req, res, next) => {
