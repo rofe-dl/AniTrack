@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const path = require("path");
+const path = require('path');
 
 /**
  * Morgan is a library used to log HTTP requests on the console
@@ -72,7 +72,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /**
- * Middleware to pass objects into all EJS templates for use. 
+ * Middleware to pass user objects into all EJS templates for use. 
  */
 app.use((req, res, next) => {
     res.locals.user = req.user || null;
