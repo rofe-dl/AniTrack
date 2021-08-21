@@ -59,7 +59,8 @@ exports.postRegister = (req, res, next) => {
                         newUser.password = hash;
                         newUser.save()
                             .then(user => {
-                                res.redirect('/login');
+                                req.flash('success_msg', 'You are now registered.');
+                                res.redirect('/login/' + req.body.email);
                             })
                             .catch(err => console.log(err));
                     });
@@ -73,14 +74,17 @@ exports.login = (req, res, next) => {
     if(req.isAuthenticated()){
         res.redirect('/');
     }else{
-        res.render('login');
+        res.render('login', {
+            email : req.params.email
+        });
     }
 }
 
 exports.postLogin = (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/',
-        failureRedirect: '/login'
+        failureRedirect: '/login/' + req.body.email,
+        failureFlash: true
     })(req, res, next);
 }
 

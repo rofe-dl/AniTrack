@@ -72,10 +72,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /**
+ * Flash messages setup.
+ */
+const flash = require('connect-flash');
+app.use(flash());
+
+/**
  * Middleware to pass user objects into all EJS templates for use. 
  */
 app.use((req, res, next) => {
     res.locals.user = req.user || null;
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error');
     next();
 });
 
@@ -95,9 +103,11 @@ app.use('/', require('./server/routes/router'));
  * 6. fix responsiveness on anime info page
  * 7. pagination in search and watch list
  * 8. fix hamburger icon
- * 9. show search result without reloading
+ * 9. show search result without reloading by fillin in input from prev search
  * 10. use bootstrap cards for anime thumbnails
  * 11. fix html title for each page
  * 12. show error messages on login
+ * 13. check authneticate on watch list
+ * 14. don't write search results on empty search page
  */
 

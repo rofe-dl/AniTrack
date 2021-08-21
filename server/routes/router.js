@@ -19,7 +19,7 @@ route.get('/anime/search', api_controller.searchAnime);
 route.get('/anime/:animeID', api_controller.viewAnimeInfo);
 
 route.get('/register', user_controller.getRegister);
-route.get('/login', user_controller.login);
+route.get('/login(/:email)?', user_controller.login);
 route.get('/logout', user_controller.logout);
 
 route.post('/register', registerFormValidations , user_controller.postRegister);
