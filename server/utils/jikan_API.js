@@ -67,7 +67,8 @@ function sleep(ms) {
  * @returns Promise that can be resolved to a response object
  */
 async function jikan(url){
-    await sleep(2000);
+    // await sleep(2000);
+    await sleep(500);
 
     // axios.get returns a promise, so do await
     return await axios.get(url);

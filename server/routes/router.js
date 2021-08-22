@@ -3,6 +3,7 @@ const route = express.Router();
 
 const { registerFormValidations } = require('../utils/validator');
 const {controller, user_controller, api_controller} = require('../controller');
+const { ensureAuthenticated } = require('../utils/authenticated');
 
 /**
  * Root URL.
@@ -17,6 +18,8 @@ route.get('/', controller.homeRoute);
  */
 route.get('/anime/search', api_controller.searchAnime);
 route.get('/anime/:animeID', api_controller.viewAnimeInfo);
+
+route.get('/watchlist', ensureAuthenticated, user_controller.watchlist);
 
 route.get('/register', user_controller.getRegister);
 route.get('/login(/:email)?', user_controller.login);

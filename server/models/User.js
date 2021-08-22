@@ -17,8 +17,11 @@ const UserSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    watchlist: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Anime'
+    }]
 });
 
-const User = mongoose.model('User', UserSchema);
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);

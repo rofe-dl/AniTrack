@@ -92,3 +92,7 @@ exports.logout = async (req, res, next) => {
     req.logout();
     res.redirect('/');
 }
+
+exports.watchlist = (req, res, next) => {
+    res.render('watchlist');
+}
