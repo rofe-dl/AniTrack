@@ -2,7 +2,7 @@
 //https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3
 // Jikan URL
 //https://api.jikan.moe/v3
-const JIKAN_URL = "https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3";
+const JIKAN_URL = "https://api.jikan.moe/v3";
 
 const axios = require('axios');
 
@@ -67,8 +67,7 @@ function sleep(ms) {
  * @returns Promise that can be resolved to a response object
  */
 async function jikan(url){
-    // await sleep(2000);
-    await sleep(500);
+    await sleep(2000);
 
     // axios.get returns a promise, so do await
     return await axios.get(url);

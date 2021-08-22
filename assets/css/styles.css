@@ -23,9 +23,8 @@ body{
 }
 
 /* Titles in watch list */
-td > a {
+td > a[href^="/anime/"] {
     color: #000000;
-    text-decoration: none;
 }
 
 /* Front page nime thumbnails with labels */

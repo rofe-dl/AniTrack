@@ -9,8 +9,6 @@ const Anime = require('../models/Anime');
 
 /**
  * View the register page.
- * @param {*} req 
- * @param {*} res 
  */
 exports.getRegister = (req, res, next) => {
     if(req.isAuthenticated()){
@@ -22,8 +20,6 @@ exports.getRegister = (req, res, next) => {
 
 /**
  * Registers the user upon post request.
- * @param {*} req 
- * @param {*} res 
  */
 exports.postRegister = (req, res, next) => {
     const errors = validationResult(req);
@@ -71,6 +67,9 @@ exports.postRegister = (req, res, next) => {
     }
 }
 
+/**
+ * View login page.
+ */
 exports.login = (req, res, next) => {
     if(req.isAuthenticated()){
         res.redirect('/');
@@ -81,6 +80,9 @@ exports.login = (req, res, next) => {
     }
 }
 
+/**
+ * Login the user
+ */
 exports.postLogin = (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/',
@@ -108,21 +110,21 @@ exports.getWatchlist = async (req, res, next) => {
                 watchlist : user.watchlist
             });
         });
-    
 }
 
 /**
  * Add anime to watch list.
  */
 exports.addAnime = async (req, res, next) => {
-    const anime_id = req.params.anime_id;
-    const response = await api.getAnimeInfo(anime_id);
+    const mal_id = req.params.anime_id;
+    const response = await api.getAnimeInfo(mal_id);
 
     // if anime not in db, add it
-    if (! await Anime.exists({mal_id : anime_id})){
+    let anime = await Anime.findOne({mal_id});
+    if (anime === null){
 
         anime = new Anime({
-            mal_id : anime_id,
+            mal_id : mal_id,
             title : response.title,
             image_url : response.image_url,
             episodes : response.episodes
@@ -130,9 +132,26 @@ exports.addAnime = async (req, res, next) => {
 
         await anime.save();
     }
+    // if does not already have it in watch list
+    if (req.user.watchlist.indexOf(anime._id) < 0){
+        req.user.watchlist.push(anime);
+        await req.user.save();
+    }
 
-    req.user.watchlist.push(anime);
-    await req.user.save();
+    res.redirect('/watchlist');
+}
+
+/**
+ * Remove anime from watch list.
+ */
+ exports.removeAnime = async (req, res, next) => {
+    const mal_id = req.params.anime_id;
+    const object = await Anime.findOne({mal_id});
+
+    if (object !== null){
+        req.user.watchlist.pull({ _id : object._id});
+        await req.user.save();
+    }
 
     res.redirect('/watchlist');
 }

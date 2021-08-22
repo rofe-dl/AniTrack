@@ -5,10 +5,11 @@
         <table class="table table-striped table-bordered mt-5 w-auto">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Episodes</th>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Episodes</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -18,6 +19,7 @@
                         <td><img class="table-image mx-auto d-block" src="<%= anime.image_url %>" alt=""></td>
                         <td class="w-75"><a href="/anime/<%= anime.mal_id %>"><%= anime.title %></a></td>
                         <td><%= anime.episodes %></td>
+                        <td><a href="/remove-anime/<%= anime.mal_id %>">Remove</a></td>
                     </tr>
                 <% }); %>
             </tbody>
