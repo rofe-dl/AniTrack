@@ -97,8 +97,14 @@ exports.logout = async (req, res, next) => {
 /**
  * Get current user's watch list.
  */
-exports.getWatchlist = (req, res, next) => {
-    res.render('watchlist');
+exports.getWatchlist = async (req, res, next) => {
+    await User.findById(req.user._id)
+        .populate('watchlist').exec((err, user) => {
+            if (err) console.log(err);
+            console.log(user.watchlist);
+            res.render('watchlist', user.watchlist);
+        });
+    
 }
 
 /**
