@@ -9,7 +9,8 @@ const AnimeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image_url : String
+    image_url : String,
+    episodes : Number
 })
 
 module.exports = mongoose.model('Anime', AnimeSchema);

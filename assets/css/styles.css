@@ -16,6 +16,18 @@ body{
     background-color: #dedede;
 }
 
+/* Images in watch list */
+.table-image {
+    width: auto;
+    height: 4em;
+}
+
+/* Titles in watch list */
+td > a {
+    color: #000000;
+    text-decoration: none;
+}
+
 /* Front page nime thumbnails with labels */
 .anime-thumbnail div{
     color: black;

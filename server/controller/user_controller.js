@@ -98,11 +98,15 @@ exports.logout = async (req, res, next) => {
  * Get current user's watch list.
  */
 exports.getWatchlist = async (req, res, next) => {
+    // populate called on the promise to find the anime object from object_id
+    // in the watch list field
     await User.findById(req.user._id)
         .populate('watchlist').exec((err, user) => {
             if (err) console.log(err);
-            console.log(user.watchlist);
-            res.render('watchlist', user.watchlist);
+
+            res.render('watchlist', {
+                watchlist : user.watchlist
+            });
         });
     
 }
@@ -120,7 +124,8 @@ exports.addAnime = async (req, res, next) => {
         anime = new Anime({
             mal_id : anime_id,
             title : response.title,
-            image_url : response.image_url
+            image_url : response.image_url,
+            episodes : response.episodes
         });
 
         await anime.save();
