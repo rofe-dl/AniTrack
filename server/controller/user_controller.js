@@ -5,6 +5,7 @@ const passport = require('passport');
 // const { v4: uuidv4 } = require('uuid');
 
 const User = require('../models/User');
+const Anime = require('../models/Anime');
 
 /**
  * View the register page.
@@ -93,6 +94,34 @@ exports.logout = async (req, res, next) => {
     res.redirect('/');
 }
 
-exports.watchlist = (req, res, next) => {
+/**
+ * Get current user's watch list.
+ */
+exports.getWatchlist = (req, res, next) => {
     res.render('watchlist');
+}
+
+/**
+ * Add anime to watch list.
+ */
+exports.addAnime = async (req, res, next) => {
+    const anime_id = req.params.anime_id;
+    const response = await api.getAnimeInfo(anime_id);
+
+    // if anime not in db, add it
+    if (! await Anime.exists({mal_id : anime_id})){
+
+        anime = new Anime({
+            mal_id : anime_id,
+            title : response.title,
+            image_url : response.image_url
+        });
+
+        await anime.save();
+    }
+
+    req.user.watchlist.push(anime);
+    await req.user.save();
+
+    res.redirect('/watchlist');
 }

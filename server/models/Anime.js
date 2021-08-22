@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const AnimeSchema = new mongoose.Schema({
-    mal_ID : {
+    mal_id : {
         type: String,
         required: true
     },

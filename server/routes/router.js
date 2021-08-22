@@ -19,7 +19,8 @@ route.get('/', controller.homeRoute);
 route.get('/anime/search', api_controller.searchAnime);
 route.get('/anime/:animeID', api_controller.viewAnimeInfo);
 
-route.get('/watchlist', ensureAuthenticated, user_controller.watchlist);
+route.get('/watchlist', ensureAuthenticated, user_controller.getWatchlist);
+route.get('/add-anime/:anime_id', ensureAuthenticated, user_controller.addAnime);
 
 route.get('/register', user_controller.getRegister);
 route.get('/login(/:email)?', user_controller.login);

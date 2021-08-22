@@ -35,12 +35,6 @@ body{
     height: auto;
 }
 
-.img-large{
-    width: auto;
-    height: auto;
-    min-height: 450px;
-}
-
 .genre-title {
     margin-top: 50px;
     margin-bottom: 20px;

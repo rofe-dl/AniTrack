@@ -6,12 +6,17 @@
             <h2><%= anime.title %></h2>
         </div>
         <div class="row row-cols-2">
-            <div class="col-12 col-lg-4">
-                <img class="img-large" src="<%= anime.image_url %>">
+            <div class="col-12 col-lg-3">
+                <img class="mx-auto d-block" src="<%= anime.image_url %>">
             </div>
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-lg-9">
                 <h4>Synopsis</h4>
                 <p><%= anime.synopsis %></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a href="/add-anime/<%= anime.mal_id %>" class="btn btn btn-primary float-right" role="button" aria-disabled="true">Add +</a>
             </div>
         </div>
     </div>
