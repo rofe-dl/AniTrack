@@ -6,7 +6,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link" href="/anime/search">Search</a>
+                <form class="form-inline" action="/anime/search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search for anime" aria-label="Search" name="name">
+                    <input type="hidden" name="genre">
+                    <input type="hidden" name="status">
+                    <input type="hidden" name="order_by">
+                    <input type="hidden" name="sort_by">
+                    <button class="btn btn-outline-dark my-2 my-sm-0 mr-1" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </button>
+                </form>
                 <% if(locals.user !== null) { %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,7 +31,7 @@
                     </li>
                 <% }else { %>
                     <a class="nav-item nav-link" href="/login">Login</a>
-                    <a class="btn btn-outline-light nav-item nav-link" href="/register">Register</a>
+                    <a class="btn btn-outline-light nav-item" href="/register" role="button">Register</a>
                 <% } %>
             </div>
         </div>

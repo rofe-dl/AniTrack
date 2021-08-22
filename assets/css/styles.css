@@ -16,6 +16,10 @@ body{
     background-color: #dedede;
 }
 
+input[type="search"] {
+    border-radius: 15px;
+}
+
 /* Images in watch list */
 .table-image {
     width: auto;
