@@ -132,7 +132,7 @@ exports.addAnime = async (req, res, next) => {
 
         await anime.save();
     }
-    // if does not already have it in watch list
+    // if user does not already have it in watch list
     if (req.user.watchlist.indexOf(anime._id) < 0){
         req.user.watchlist.push(anime);
         await req.user.save();
