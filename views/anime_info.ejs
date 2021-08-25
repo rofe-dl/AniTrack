@@ -2,10 +2,12 @@
 <body>
     <%- include('./include/_navbar.ejs') %>
     <div class="container">
-        <div class="general-title text-center">
-            <h2><%= anime.title %></h2>
+        <div class="my-5">
+            <div class="text-center text-lg-left"><h2><%= anime.title %></h2></div>
+            <div class="text-center text-lg-right"><%= anime.status %></div>
+            <div class="text-center text-lg-right">Episodes: <%= anime.episodes %></div>
         </div>
-        <div class="row row-cols-2">
+        <div class="row row-cols-2 p-4 synopsis">
             <div class="col-12 col-lg-3">
                 <img class="mx-auto d-block" src="<%= anime.image_url %>">
             </div>
@@ -14,9 +16,58 @@
                 <p><%= anime.synopsis %></p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="/add-anime/<%= anime.mal_id %>" class="btn btn btn-primary float-right" role="button" aria-disabled="true">Add +</a>
+        <div class="row my-5">
+            <div class="col-lg-10 col-12">
+                <hr color="white">
+                <div class="mb-2">
+                    <b>Genre: </b>
+                    <%  anime.genres.forEach( (genre, index) => { %>
+                        <%= genre.name %>
+                        <% if (anime.genres.length !== (index + 1)) { %>
+                            ,
+                        <% } %>
+                    <% }); %>
+                </div>
+                <div class="mb-2">
+                    <b>Type:</b>
+                    <%= anime.type %>
+                </div>
+                <div class="mb-2">
+                    <b>Source:</b>
+                    <%= anime.source %>
+                </div>
+                <div class="mb-2">
+                    <b>Aired Duration:</b>
+                    <%= anime.aired.string %>
+                </div>
+                <div class="mb-2">
+                    <b>Producer(s):</b>
+                    <%  anime.producers.forEach( (producer, index) => { %>
+                        <%= producer.name %>
+                        <% if (anime.producers.length !== (index + 1)) { %>
+                            ,
+                        <% } %>
+                    <% }); %>
+                </div>
+                <div class="mb-2">
+                    <b>Studio(s):</b>
+                    <%  anime.studios.forEach( (studio, index) => { %>
+                        <%= studio.name %>
+                        <% if (anime.studios.length !== (index + 1)) { %>
+                            ,
+                        <% } %>
+                    <% }); %>
+                </div>
+                <hr color="white">
+            </div>
+            <div class="col-lg-2 col-12">
+                <a href="/add-anime/<%= anime.mal_id %>" class="btn btn btn-primary float-right" role="button" aria-disabled="true">Add To Watchlist +</a>
+            </div>
+        </div>
+        <div class="row my-5">
+            <h3 class="mb-4">Trailer/PV</h3>
+            <div class="col-12 embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="<%= anime.trailer_url%>" allowfullscreen></iframe>
             </div>
         </div>
     </div>

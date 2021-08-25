@@ -3,25 +3,25 @@
 
     <%- include('./include/_navbar.ejs') %>
     <div class="container">
-        <h4 class="genre-title">Comedy Anime</h4>
+        <h4 class="my-5">Comedy Anime</h4>
         <div class="row row-cols-5">
             <%  animeFound.comedy.forEach( (anime) => { %>
                 <%- include('./include/_anime_thumbnail.ejs', {anime: anime}) %>
             <% }); %>
         </div>
-        <h4 class="genre-title">Seinen Anime</h4>
+        <h4 class="my-5">Seinen Anime</h4>
         <div class="row row-cols-5">
             <%  animeFound.seinen.forEach( (anime) => { %>
                 <%- include('./include/_anime_thumbnail.ejs', {anime: anime}) %>
             <% }); %>
         </div>
-        <h4 class="genre-title">Shoujo Anime</h4>
+        <h4 class="my-5">Shoujo Anime</h4>
         <div class="row row-cols-5">
             <%  animeFound.shoujo.forEach( (anime) => { %>
                 <%- include('./include/_anime_thumbnail.ejs', {anime: anime}) %>
             <% }); %>
         </div>
-        <h4 class="genre-title">Thriller Anime</h4>
+        <h4 class="my-5">Thriller Anime</h4>
         <div class="row row-cols-5">
             <%  animeFound.thriller.forEach( (anime) => { %>
                 <%- include('./include/_anime_thumbnail.ejs', {anime: anime}) %>

@@ -13,9 +13,31 @@
 }
 
 body{
-    background-color: #dedede;
+    /* background-color: #dedede; */
+    background-color: #17181a;
+    color: white !important;
+    font-family: 'Lato', sans-serif;
+    border-color: #d95e07;
 }
 
+/* Login and register cards */
+.card{
+    background-color:#282a2e !important;
+    border-radius: 10px;
+}
+
+/* Anime titles on thumbnails */
+.anime-thumbnail > a{
+    text-decoration: none;
+    color: white;
+}
+
+/* Anime titles on thumbnails */
+.anime-thumbnail{
+    text-align: center;
+}
+
+/* Navbar search bar */
 input[type="search"] {
     border-radius: 10px;
 }
@@ -28,41 +50,22 @@ input[type="search"] {
 
 /* Titles in watch list */
 td > a[href^="/anime/"] {
-    color: #000000;
+    color: white;
 }
 
-/* Front page nime thumbnails with labels */
-.anime-thumbnail div{
-    color: black;
-    font-family: 'Lato', sans-serif;
-}
-
-.anime-thumbnail{
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
- /*                             */
-
+/* Anime thumbnail images on front page */
 .img-small{
     max-height: 250px;
     width: auto;
     height: auto;
 }
 
-.genre-title {
-    margin-top: 50px;
-    margin-bottom: 20px;
-    margin-left: 10px;
-    margin-right:10px;
-    font-family: 'Lato', sans-serif;
+/* Synopsis on anime info page */
+.synopsis{
+    border-color: #d95e07;
+    border-style: solid;
+    border-radius: 15px;
 }
 
-.general-title {
-    margin-top: 75px;
-    margin-bottom: 60px;
-    margin-left: 10px;
-    margin-right:10px;
-    font-family: 'Lato', sans-serif;
-}
+
 
