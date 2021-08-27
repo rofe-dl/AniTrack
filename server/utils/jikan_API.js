@@ -163,6 +163,14 @@ module.exports.searchAnime = async(query) => {
     return response;
 }
 
+/**
+ * Function that takes in query parameters from the season search function and 
+ * return the anime of that year and season.
+ * No caching is done here. 
+ * 
+ * @param {String} query    Contains query parameters from the url 
+ * @returns JSON response with a field 'anime', containing the anime found
+ */
 module.exports.searchAnimeBySeason = async(query) => {
 
     let response = await jikan(`${JIKAN_URL}/season/${query.year}/${query.season}`);
