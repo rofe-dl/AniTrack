@@ -17,6 +17,7 @@ route.get('/', controller.homeRoute);
  * return anything.
  */
 route.get('/anime/search', api_controller.searchAnime);
+route.get('/anime/season-search', api_controller.searchAnimeBySeason);
 route.get('/anime/:animeID', api_controller.viewAnimeInfo);
 
 route.get('/watchlist', ensureAuthenticated, user_controller.getWatchlist);

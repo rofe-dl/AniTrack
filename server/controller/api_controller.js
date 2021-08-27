@@ -21,7 +21,23 @@ exports.searchAnime = async(req, res) => {
     }else{
         const response = await api.searchAnime(req.query);
         res.render('search_anime', {
-            results : response.results // json response has a field named results containing the anime
+            results : response.results 
+        });
+    }
+}
+
+/**
+ * Search anime by seasons page
+ */
+ exports.searchAnimeBySeason = async(req, res) => {
+    if (!Object.keys(req.query).length){
+        res.render('search_anime_season', {
+            results : []
+        });
+    }else{
+        const response = await api.searchAnimeBySeason(req.query);
+        res.render('search_anime_season', {
+            results : response.anime 
         });
     }
 }

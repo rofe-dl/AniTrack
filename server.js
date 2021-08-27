@@ -96,13 +96,12 @@ app.use('/', require('./server/routes/router'));
 /**
  * TODO:
  * 1. prevent reload on remove/add to watch list
- * 2. slider in front page
+ * 2. slider in front page with anime by season
  * 5. fix stale cache
- * 6. fix responsiveness on anime info page
+ * 6. search by season
  * 7. pagination in search and watch list
  * 8. fix hamburger icon
  * 9. show search result without reloading by fillin in input from prev search
- * 10. use bootstrap cards for anime thumbnails
  * 11. fix html title for each page
  * 14. don't write search results on empty search page
  */

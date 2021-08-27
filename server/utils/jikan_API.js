@@ -2,7 +2,7 @@
 //https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3
 // Jikan URL
 //https://api.jikan.moe/v3
-const JIKAN_URL = "https://api.jikan.moe/v3";
+const JIKAN_URL = "https://private-anon-c7736fee61-jikan.apiary-proxy.com/v3";
 
 const axios = require('axios');
 
@@ -158,6 +158,14 @@ module.exports.searchAnime = async(query) => {
     });
 
     let response = await jikan(`${JIKAN_URL}/search/anime?${params.toString()}`);
+    response = response.data;
+
+    return response;
+}
+
+module.exports.searchAnimeBySeason = async(query) => {
+
+    let response = await jikan(`${JIKAN_URL}/season/${query.year}/${query.season}`);
     response = response.data;
 
     return response;
