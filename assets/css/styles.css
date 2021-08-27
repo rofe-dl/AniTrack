@@ -12,6 +12,15 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,.2); /* adds a shadow under nav bar */
 }
 
+footer{
+    background-color: #d95e07;
+}
+
+footer a{
+    text-decoration: none;
+    color: white;
+}
+
 body{
     /* background-color: #dedede; */
     background-color: #17181a;

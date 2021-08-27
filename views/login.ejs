@@ -1,46 +1,49 @@
 <%- include('./include/_head.ejs') %>
 <body>
     <%- include('./include/_navbar.ejs') %>
-
-    <div class="row mt-5">
-        <div class="col-md-4 m-auto">
-            <div class="card card-body p-5 mx-auto w-100">
-                <h1 class="text-center mb-3">
-                    Login
-                </h1>
-
-                <%- include('./include/_message.ejs') %>
-                
-                <form action="/login" method="POST">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        class=" form-control form-control-sm"
-                        value="<%= typeof email != 'undefined' ? email : '' %>"
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="form-control form-control-sm"
-                        />
-                    </div>
-
-                    <button type="submit" class="btn btn-primary float-right">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-6 col-10 m-auto">
+                <div class="card card-body p-5 mx-auto w-100">
+                    <h1 class="text-center mb-3">
                         Login
-                    </button>
-                </form>
-                <p class="lead mt-4">Don't Have An Account? <a href="/register">Register</a></p>
+                    </h1>
+    
+                    <%- include('./include/_message.ejs') %>
+                    
+                    <form action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class=" form-control form-control-sm"
+                            value="<%= typeof email != 'undefined' ? email : '' %>"
+                            />
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control form-control-sm"
+                            />
+                        </div>
+    
+                        <button type="submit" class="btn btn-primary float-right">
+                            Login
+                        </button>
+                    </form>
+                    <p class="lead mt-4">Don't Have An Account? <a href="/register">Register</a></p>
+                </div>
             </div>
         </div>
     </div>
+    
+    <%- include('./include/_footer.ejs') %>
 </body>
 
 </html>
