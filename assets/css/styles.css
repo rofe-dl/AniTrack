@@ -9,7 +9,11 @@
 
 .navbar{
     background-color: #d95e07;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,.2); /* adds a shadow under nav bar */
+    box-shadow: 0 8px 16px 0 rgba(235, 201, 201, 0.2); /* adds a shadow under nav bar */
+}
+
+.mh-85{
+    min-height: 85vh;
 }
 
 footer{
