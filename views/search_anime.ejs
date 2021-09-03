@@ -1,60 +1,63 @@
 <%- include('./include/_head.ejs') %>
 <body>
     <%- include('./include/_navbar.ejs') %>
-    <div class="container mh-85">
-        <div class="text-center my-5">
-            <h4>Search</h4>
-        </div>
-        <form method="GET" action="/anime/search">
-            <div class="form-row">
-                <div class="col-md-2 col-12 mb-3">
-                  <input type="text" class="form-control form-control-sm" placeholder="Search ..." name="name">
-                </div>
-                <div class="col-md-2 col-4 mb-3">
-                  <select class="form-control form-control-sm" name="genre">
-                    <%- include('./include/_genres.ejs') %>
-                  </select>
-                </div>
-                <div class="col-md-2 col-4 mb-3">
-                    <select class="form-control form-control-sm" name="status">
-                        <option value="">-- Status --</option>
-                        <option value="airing">Airing</option>
-                        <option value="completed">Completed</option>
-                        <option value="to_be_aired">To Be Aired</option>
-                        <option value="upcoming">Upcoming</option>
-                    </select>
-                </div>
-                <div class="col-md-2 col-4 mb-3">
-                    <select class="form-control form-control-sm" name="order_by">
-                        <option value="">-- Order By --</option>
-                        <option value="title">Title</option>
-                        <option value="start_date">Start Date</option>
-                        <option value="end_date">End Date</option>
-                        <option value="score">Score</option>
-                    </select>
-                </div>
-                <div class="col-md-2 col-8 mb-3">
-                    <select class="form-control form-control-sm" name="sort_by">
-                        <option value="">-- Sort By --</option>
-                        <option value="ascending">Ascending</option>
-                        <option value="descending">Descending</option>
-                    </select>
-                </div>
-                <div class="col-md-2 col-4 mb-3">
-                    <button type="submit" class="btn btn-primary btn-sm btn-block">Search</button>
-                </div>
+    <div class="mh-85">
+        <div class="container">
+            <div class="text-center my-5">
+                <h4>Search</h4>
             </div>
-        </form>
-        <hr color="white">
-    </div>
-
-    <div class="container">
-        <div class="row row-cols-5">
-            <%  results.forEach( (anime) => { %>
-                <%- include('./include/_anime_thumbnail.ejs', {anime: anime}) %>
-            <% }); %>
+            <form method="GET" action="/anime/search">
+                <div class="form-row">
+                    <div class="col-md-2 col-12 mb-3">
+                      <input type="text" class="form-control form-control-sm" placeholder="Search ..." name="name">
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                      <select class="form-control form-control-sm" name="genre">
+                        <%- include('./include/_genres.ejs') %>
+                      </select>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <select class="form-control form-control-sm" name="status">
+                            <option value="">-- Status --</option>
+                            <option value="airing">Airing</option>
+                            <option value="completed">Completed</option>
+                            <option value="to_be_aired">To Be Aired</option>
+                            <option value="upcoming">Upcoming</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <select class="form-control form-control-sm" name="order_by">
+                            <option value="">-- Order By --</option>
+                            <option value="title">Title</option>
+                            <option value="start_date">Start Date</option>
+                            <option value="end_date">End Date</option>
+                            <option value="score">Score</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-8 mb-3">
+                        <select class="form-control form-control-sm" name="sort_by">
+                            <option value="">-- Sort By --</option>
+                            <option value="ascending">Ascending</option>
+                            <option value="descending">Descending</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-4 mb-3">
+                        <button type="submit" class="btn btn-primary btn-sm btn-block">Search</button>
+                    </div>
+                </div>
+            </form>
+            <hr color="white">
+        </div>
+    
+        <div class="container">
+            <div class="row row-cols-5">
+                <%  results.forEach( (anime) => { %>
+                    <%- include('./include/_anime_thumbnail.ejs', {anime: anime}) %>
+                <% }); %>
+            </div>
         </div>
     </div>
+    
     <%- include('./include/_footer.ejs') %>
 </body>
 </html>
