@@ -10,5 +10,5 @@ describe('Jikan API', () => {
     it('getAnimeInfo should return details of Cowboy Bebop', async() => {
         const result = await jikan_API.getAnimeInfo(1);
         assert.equal(result.title, 'Cowboy Bebop');
-    })
+    });
 });

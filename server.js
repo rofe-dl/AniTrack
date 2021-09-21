@@ -104,3 +104,4 @@ app.use('/', require('./server/routes/router'));
  * 11. fix html title for each page
  */
 
+module.exports = app;
