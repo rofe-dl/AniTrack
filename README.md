@@ -1,11 +1,16 @@
-# AniTrack (Work In Progress)
+# AniTrack
 [![image.png](https://i.postimg.cc/NGpd6jg9/image.png)](https://postimg.cc/SjYLqqYk)
-Anitrack is an anime tracking website, where you can browse anime by different criteria and view information about them. By logging in, you can add them to your watch list. 
-
-This is a university project work for my CSE470 (Software Development) course.
+Anitrack is an anime tracking website, where you can browse anime by different criteria and view information about them. By logging in, you can add them to your watch list.
 ## Setup Instructions
 
-// TO DO
+1. Clone the repository
+1. Install Node.js for your system
+1. Install packages using 'npm install' in the directory
+1. Make a 'config.env' file with PORT=3000, session_secret="random_string", MongoURI="your mongoDB url"
+1. Create an Atlas account, create a MongoDB database, whitelist IP as 0.0.0.0/0
+1. Install redis and start the redis server. If you're on Windows, install WSL and install redis in that
+1. Run 'npm start' to start the main server
+
 
 ## Development
 
