@@ -6,8 +6,13 @@ Anitrack is an anime tracking website, where you can browse anime by different c
 1. Clone the repository
 1. Install Node.js for your system
 1. Install packages using 'npm install' in the directory
-1. Make a 'config.env' file with PORT=3000, session_secret="random_string", MongoURI="your mongoDB url"
-1. Create an Atlas account, create a MongoDB database, whitelist IP as 0.0.0.0/0
+1. Create an Atlas account, create a MongoDB database for this project
+1. Make a 'config.env' file with 
+    ```
+    PORT=3000, //or any port number of your choice
+    session_secret="random_string", 
+    MongoURI="your MongoDB URL" // atlas should give you that
+    ```
 1. Install redis and start the redis server. If you're on Windows, install WSL and install redis in that
 1. Run 'npm start' to start the main server
 
